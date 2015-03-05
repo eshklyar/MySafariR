@@ -17,10 +17,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7TX-IC-0B9">
+                            <webView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7TX-IC-0B9">
                                 <rect key="frame" x="0.0" y="70" width="600" height="300"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="tintColor" red="0.84071341889999995" green="1" blue="0.97324431229999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="CwP-gZ-Rmb"/>
                                 </connections>
@@ -31,21 +31,72 @@
                                     <constraint firstAttribute="width" constant="310" id="kRm-E8-hTn"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="URL" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="PeM-id-JSv"/>
+                                </connections>
                             </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NZR-vG-Z81">
+                                <rect key="frame" x="0.0" y="390" width="600" height="181"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dy9-j5-xSl">
+                                        <rect key="frame" x="166" y="63" width="46" height="30"/>
+                                        <state key="normal" title="&lt;">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onBackButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Ylt-Bd-wZ7"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5VR-c8-zKM">
+                                        <rect key="frame" x="220" y="63" width="49" height="33"/>
+                                        <state key="normal" title="Stop">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onStopLoadingButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="eNn-rg-b1M"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ik-xU-frT">
+                                        <rect key="frame" x="277" y="63" width="54" height="33"/>
+                                        <state key="normal" title="Reload">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onReloadButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Khf-oX-wS0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nSP-Pw-98N">
+                                        <rect key="frame" x="339" y="63" width="46" height="30"/>
+                                        <state key="normal" title="&gt;">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onForwardButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="qAt-Fc-TCT"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="znk-WI-OCD" firstAttribute="centerX" secondItem="7TX-IC-0B9" secondAttribute="centerX" id="92q-Ls-eL8"/>
                             <constraint firstItem="7TX-IC-0B9" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="A45-p5-yfi"/>
+                            <constraint firstItem="NZR-vG-Z81" firstAttribute="top" secondItem="7TX-IC-0B9" secondAttribute="bottom" constant="20" id="Dbm-32-hlW"/>
                             <constraint firstAttribute="centerX" secondItem="7TX-IC-0B9" secondAttribute="centerX" id="Rf3-NO-dgz"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="NZR-vG-Z81" secondAttribute="bottom" constant="29" id="ZBJ-Ce-00F"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="7TX-IC-0B9" secondAttribute="bottom" constant="230" id="aLp-w3-X7w"/>
                             <constraint firstItem="7TX-IC-0B9" firstAttribute="top" secondItem="znk-WI-OCD" secondAttribute="bottom" constant="20" id="b90-AJ-BKi"/>
+                            <constraint firstAttribute="centerX" secondItem="NZR-vG-Z81" secondAttribute="centerX" id="hb5-0v-Jat"/>
                             <constraint firstAttribute="trailingMargin" secondItem="7TX-IC-0B9" secondAttribute="trailing" constant="-16" id="teA-Da-6zk"/>
                             <constraint firstItem="znk-WI-OCD" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" id="xBu-wi-9HH"/>
+                            <constraint firstItem="NZR-vG-Z81" firstAttribute="leading" secondItem="znk-WI-OCD" secondAttribute="leading" constant="-145" id="zIZ-SX-CJG"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="goBackButton" destination="dy9-j5-xSl" id="T3r-6t-kEE"/>
+                        <outlet property="goForwardButton" destination="nSP-Pw-98N" id="Az7-dg-xdy"/>
                         <outlet property="urlTextField" destination="znk-WI-OCD" id="VNV-Vi-HzG"/>
                         <outlet property="webView" destination="7TX-IC-0B9" id="l58-IO-Upr"/>
                     </connections>
