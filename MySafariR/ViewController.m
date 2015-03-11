@@ -18,6 +18,31 @@
 @end
 
 @implementation ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.webView.delegate=self;
+    self.webView.scrollView.scrollEnabled = TRUE;
+    self.webView.scalesPageToFit = TRUE;
+
+    self.urlTextField.delegate = self;
+    [self disableGoForward];
+    [self disableGoBack];
+//    self.urlTextField.text = @"type url here";
+    self.urlTextField.placeholder = @"type url here";
+//    self.urlTextField.clearButtonMode = UITextFieldViewModeAlways;
+    self.urlTextField.clearButtonMode = UITextFieldViewModeAlways;
+//    self.urlTextField.clearButtonMode  = UITextFieldViewModeWhileEditing;
+
+}
+-(void) viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    NSLog(@"view will Appear");
+    //    [self disableGoBack];
+    //    [self disableGoForward];
+}
+#pragma mark - Buttons
+
 - (IBAction)onBackButtonPressed:(id)sender {
     [self.webView goBack];
 }
@@ -30,35 +55,43 @@
 - (IBAction)onReloadButtonPressed:(id)sender {
     [self.webView reload];
 }
+- (IBAction)onClearButtonPressed:(id)sender {
+//    self.urlTextField.clearButtonMode = UITextFieldViewModeAlways;
+    self.urlTextField.clearButtonMode  = UITextFieldViewModeWhileEditing;
+
+//    self.urlTextField.text = @"";
+//    [self.urlTextField textFieldShouldClear] = YES;
+}
+
+- (IBAction)onPreviewButtonPressed:(id)sender {
+    UIAlertController *alert = [UIAlertController new];
+    alert.message = @"Comming Soon!";
 
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.webView.delegate=self;
-    self.urlTextField.delegate = self;
+    UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+    [alert addAction:ok];
+
+    [self presentViewController:alert animated:YES completion:nil];
+
 
 }
--(void) viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    NSLog(@"view will Appear");
-//    [self disableGoBack];
-//    [self disableGoForward];
-}
+
+
 
 -(void)disableGoForward {
-    if (!self.webView.canGoBack) {
-        self.goForwardButton.enabled=false;
+    if (!self.webView.canGoForward) {
+        self.goForwardButton.enabled=NO;
     }
     else{
-        self.goForwardButton.enabled=true;
+        self.goForwardButton.enabled=YES;
     }
 }
 -(void)disableGoBack {
     if (!self.webView.canGoBack) {
-        self.goBackButton.enabled =false;
+        self.goBackButton.enabled =NO;
     }
     else{
-        self.goBackButton.enabled=true;
+        self.goBackButton.enabled=YES;
     }
 }
 
@@ -93,12 +126,28 @@
     return YES;
 
 }
+- (BOOL)textFieldShouldClear:(UITextField *)textField{
+    return YES;
+}
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     [self disableGoBack];
     [self disableGoForward];
+//    NSString *requestPath = [[urlRequest URL] absoluteString];
+//    self.urlTextField.text =requestPath;
+
+//    self.urlTextField.text = self.webView.request.description.uppercaseString;
+    self.urlTextField.text = self.webView.request.URL.absoluteString;
+    self.title = self.webView.request.URL.host;
+
+    if (self.webView.scrollView.tracking) {
+        self.urlTextField.hidden = TRUE;
+    } else {
+         self.urlTextField.hidden = FALSE;
+    }
+
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
