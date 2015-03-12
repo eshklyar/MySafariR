@@ -148,6 +148,8 @@
          self.urlTextField.hidden = FALSE;
     }
 
+    
+
 }
 
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
